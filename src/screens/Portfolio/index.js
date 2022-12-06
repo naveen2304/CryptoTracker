@@ -6,8 +6,10 @@ import styles from './styles';
 
 const Portfolio = () => {
   const holdings = [
-    {id: 1, name: 'BTC', quantity: 0.057693417},
-    {id: 1027, name: 'ETH', quantity: 0.46},
+    {id: 1, name: 'Bitcoin', quantity: 0.01},
+    {id: 1027, name: 'Ethereum', quantity: 0.4},
+    {id: 825, name: 'Tether', quantity: 0.6},
+    {id: 1839, name: 'BNB', quantity: 0.1},
   ];
   const [holdingValues, setHoldingValues] = useState();
   const [loading, setLoading] = useState(false);

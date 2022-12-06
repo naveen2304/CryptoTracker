@@ -8,11 +8,19 @@ import getCryptoMetaData from '../../api/getCryptoMetaData';
 
 const CryptoList = () => {
   const [cryptoData, setCryptoData] = useState();
+  const [isFetching, setIsFetching] = useState(false);
+
   const [cryptoMetaData, setCryptoMetaData] = useState();
   const [loading, setLoading] = useState(false);
 
-  const setCryptoDetails = async () => {
-    setLoading(true);
+  const onRefresh = async () => {
+    setIsFetching(true);
+    await setCryptoDetails(false);
+    setIsFetching(false);
+  };
+
+  const setCryptoDetails = async (loaderRequired = true) => {
+    setLoading(loaderRequired);
     const cryptoResponseData = await getCryptoData();
     const cryptoMetaResponseData = await getCryptoMetaData(
       cryptoResponseData.map(cryptoItem => cryptoItem.id).join(','),
@@ -26,7 +34,7 @@ const CryptoList = () => {
     setCryptoDetails();
   }, []);
 
-  const renderItem = ({item}) => <CryptoCurrencyItem item={item} />;
+  const renderItem = ({item = {}} = {}) => <CryptoCurrencyItem item={item} />;
 
   return (
     <View style={styles(loading).mainContainer}>
@@ -41,14 +49,14 @@ const CryptoList = () => {
             <Text style={styles().column}>Circulating Supply</Text>
           </View>
           <FlatList
-            data={cryptoData?.map(cryptoItem => {
-              return {
-                ...cryptoItem,
-                logo: cryptoMetaData?.[cryptoItem?.id?.toString() ?? '1']?.logo,
-              };
-            })}
+            data={cryptoData?.map(cryptoItem => ({
+              ...cryptoItem,
+              logo: cryptoMetaData?.[cryptoItem?.id?.toString() ?? '1']?.logo,
+            }))}
             renderItem={renderItem}
             keyExtractor={item => item?.id ?? 0}
+            onRefresh={onRefresh}
+            refreshing={isFetching}
           />
         </View>
       )}

@@ -19,6 +19,8 @@ const styles = (loading = false) =>
     },
     nameSymbolContainer: {
       display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
       width: '65%',
     },
     rank: {
@@ -39,25 +41,21 @@ const styles = (loading = false) =>
       textAlign: 'right',
       color: 'white',
     },
-    rightContainer: {width: '30%'},
+    rightContainer: {width: '33%'},
     price: {
-      fontSize: 16,
+      fontSize: 14,
       textAlign: 'right',
       color: 'white',
     },
     middleContainer: {
-      width: 'auto',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-end',
+      width: '27%',
     },
     mainContainer: {
       backgroundColor: 'darkslategrey',
       height: '100%',
       justifyContent: loading ? 'center' : 'flex-start',
     },
-    dataContainer: {paddingBottom: 40},
+    dataContainer: {paddingBottom: 50},
     leftHeaderContainer: {
       width: '32%',
       display: 'flex',

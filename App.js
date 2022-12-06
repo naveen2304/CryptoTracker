@@ -16,7 +16,10 @@ const Tab = createBottomTabNavigator();
 
 const LoggedInScreen = () => (
   <Tab.Navigator
-    screenOptions={{tabBarStyle: {backgroundColor: 'darkslategrey'}}}>
+    screenOptions={{
+      tabBarStyle: {backgroundColor: 'darkslategrey'},
+      unmountOnBlur: true,
+    }}>
     <Tab.Screen
       name="Market"
       component={CryptoList}
@@ -44,13 +47,11 @@ const MyDrawer = ({route}) => (
         headerTitleStyle: {color: 'white'},
         headerStyle: {backgroundColor: 'darkslategrey'},
       }}
-      initialParams={{userName: route?.params?.userName}}
     />
     <Drawer.Screen
-      name="Logout"
-      component={HomePage}
+      name="Home"
+      component={MyStack}
       options={{headerShown: false}}
-      initialParams={{logout: true}}
     />
   </Drawer.Navigator>
 );

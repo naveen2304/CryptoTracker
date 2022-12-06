@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {CMC_PRO_API_KEY} from '@env';
 
 const getQuotesLatest = async (ids = '') => {
   const response = await axios.get(
-    `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${ids}&CMC_PRO_API_KEY=2c811d9d-70e3-4ff6-8b53-44da3b1e806e&convert=INR`,
+    `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${ids}&CMC_PRO_API_KEY=${CMC_PRO_API_KEY}&convert=INR`,
   );
   return response?.data ?? {};
 };

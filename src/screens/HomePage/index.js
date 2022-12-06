@@ -5,19 +5,20 @@ import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
-import {googleSignInUtil, googleSignOutUtil} from '../../utils';
 import styles from './styles';
 
 const image = {
   uri: 'https://images.unsplash.com/photo-1621504450181-5d356f61d307?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
 };
 
-const HomePage = ({navigation, route}) => {
-  useEffect(() => {
-    if (route?.params?.logout) {
-      googleSignOutUtil();
-    }
-  }, [route?.params?.logout]);
+const HomePage = ({navigation}) => {
+  const googleSignInUtil = async () => {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    navigation.navigate('MyDrawer', {
+      userName: userInfo?.user?.givenName ?? '',
+    });
+  };
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -38,7 +39,7 @@ const HomePage = ({navigation, route}) => {
             style={styles.googleSignInButton}
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Dark}
-            onPress={() => googleSignInUtil(navigation)}
+            onPress={googleSignInUtil}
           />
         </View>
       </ImageBackground>
