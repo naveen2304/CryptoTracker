@@ -16,6 +16,10 @@
 7. Install Xcode from the Mac App Store. You will also need to install the Xcode Command Line Tools. Open Xcode, then choose "Preferences..." from the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
 8. Create a file named `.env` in the root folder of the cloned repository and add the following content to it:\
 `CMC_PRO_API_KEY={YOUR_API_KEY_FROM_COIN_MARKET_CAP}`
+9. Open a terminal in the root folder of the cloned repository and run the following commands to install the node modules and pods required for the project:\
+`npm install`\
+`cd ios`\
+`pod install`
 9. Start metro by running the following command in the terminal of the root folder of cloned repository:\
 `npx react-native start`
 10. Open a new terminal in the root folder of the cloned repository and run the following command to start the app on IOS Simulator:\
